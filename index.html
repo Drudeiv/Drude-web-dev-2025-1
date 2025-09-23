@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Food Construct</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Food Construct</h1>
+        <nav>
+            <ul class="nav-menu">
+                <li><a href="#about" class="active">О нас</a></li>
+                <li><a href="menu.html">Собрать ланч</a></li>
+                <li><a href="#">Заказы</a></li>
+                <li><a href="#footer-contacts">Контакты</a></li>
+                <li><a href="#auth_form">Войти</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="container">
+        <section id="about">
+            <div class="image-container">
+                <img src="images/lunch.jpg" alt="Блюда Food Construct">
+            </div>
+            <h2>О нас</h2>
+            <p>
+                Food Construct - доставка бизнес-ланчей в Москве. Мы привезём вам горячую вкусную еду в любую точку города к назначенному времени.
+            </p>
+        </section>
+
+        <section>
+            <h2>Преимущества Food Construct</h2>
+            <ul class="advantages-list">
+                <li>Привозим обед к назначенному времени без опозданий</li>
+                <li>Надёжно упаковываем блюда в удобные контейнеры бесплатно</li>
+                <li>Доставляем ланчи весь день с 7:00 до 23:00</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Топ-5 популярных блюд</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Название</th>
+                        <th>Кол-во заказов в неделю</th>
+                        <th>Цена</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Лазанья</td>
+                        <td>185</td>
+                        <td>385&#8381;</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Том Ям с креветками</td>
+                        <td>161</td>
+                        <td>365&#8381;</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>Норвежский суп</td>
+                        <td>144</td>
+                        <td>270&#8381;</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>Жареная картошка с грибами</td>
+                        <td>132</td>
+                        <td>150&#8381;</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>Котлеты из курицы с картофельным пюре</td>
+                        <td>128</td>
+                        <td>225&#8381;</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+        <section id="feedback-section">
+            <h2>Обратная связь</h2>
+            <div class="form_container">
+                <form id="feedback" action="https://httpbin.org/post" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="name">ФИО:</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Откуда узнали о нас:</label>
+                        <div class="radio-group">
+                            <input type="radio" id="var1" name="var" value="internet" required>
+                            <label for="var1">Поиск в интернете</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" id="var2" name="var" value="social" required>
+                            <label for="var2">Социальные сети</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" id="var3" name="var" value="friends" required>
+                            <label for="var3">От друзей/знакомых</label>
+                        </div>
+                        <div class="radio-group">
+                            <input type="radio" id="var4" name="var" value="other" required>
+                            <label for="var4">Другое</label>
+                        </div>
+                    </div>
+                        <div class="form-group">
+                            <label for="type">Тип обращения:</label>
+                            <select id="type" name="type" required>
+                                <option value="">--Выберите тип--</option>
+                                <option value="complaint">Жалоба</option>
+                                <option value="suggestion">Предложение</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Текст сообщения:</label>
+                            <textarea id="message" name="message" required></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="attachment">Вложения:</label>
+                            <input type="file" id="attachment" name="attachment">
+                        </div>
+                        
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="consent" name="consent" required>
+                            <label for="consent">Даю согласие на обработку персональных данных</label>
+                        </div>
+                        <button type="submit">Отправить</button>
+                    </form>
+                </div>
+            </section>
+        </div>
+    </main>
+    
+    <div id="auth_form" class="auth-modal">
+        <div class="auth-modal-content">
+            <a href="#" class="close-btn">&times;</a>
+            <h2>Вход в систему</h2>
+            <form action="https://httpbin.org/post" method="POST">
+                <div class="form-group">
+                    <label for="login">Логин:</label>
+                    <input type="text" id="login" name="login" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Пароль:</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                
+                <div class="checkbox-group">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Запомнить меня</label>
+                </div>
+                
+                <button type="submit">Войти</button>
+            </form>
+        </div>
+    </div>
+    
+    <footer id="footer-contacts">
+        <div class="footer-content">
+            <p>Позвонить нам: +7-000-000-00-00</p>
+        </div>
+    </footer>   
+    </main>
+</body>
+</html>

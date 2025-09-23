@@ -1,0 +1,376 @@
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
+body {
+    margin: 0;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: black;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+main {
+    flex: 1;
+}
+
+header {
+    margin: 0;
+    padding: 5px 15px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background-color: white;
+    box-shadow: 0 2px 5px rgb(193, 192, 192);
+}
+
+footer, main {
+    margin: 0;
+    padding: 15px;
+}
+
+h1 {
+    font-size: 26px;
+    font-weight: 700;
+    margin-left: 10px;
+    color: black;
+    padding: 10px 0;
+}
+
+h2 {
+    font-size: 24px;
+    font-weight: 700;
+    color: black;
+    margin-left: 10px;
+}
+
+p {
+    font-size: 16px;
+    font-weight: 400;
+    color: black;
+}
+
+nav {
+    margin: 0;
+    padding: 10px 10px 5px 10px;
+}
+
+ul.nav-menu {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+ul.nav-menu li {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    color: black;
+}
+
+a:hover {
+    color: tomato;
+}
+
+footer {
+    background-color: black;
+}
+
+.footer-content {
+    margin: 0;
+    padding: 15px;
+}
+
+footer p {
+    margin: 0;
+    color: white;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    min-height: 100px;
+    resize: vertical;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="tel"],
+input[type="time"] {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+}
+
+small {
+    display: block;
+    margin-top: 5px;
+    color: #666;
+    font-size: 14px;
+}
+
+.radio-group {
+    margin: 10px 0;
+}
+
+.radio-group label {
+    display: inline;
+    margin-left: 5px;
+    font-weight: normal;
+}
+
+button {
+    background-color: tomato;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: 500;
+    width: 100%;
+}
+
+button:hover {
+    background-color: #d6341e;
+}
+
+.checkbox-group {
+    margin: 15px 0;
+}
+
+.checkbox-group label {
+    display: inline;
+    margin-left: 5px;
+    font-weight: normal;
+}
+
+.dishes-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    gap: 10px; 
+    margin-top: 20px;
+}
+
+.dish-card {
+    display: flex;
+    flex-direction: column;
+    background: white;
+    padding: 30px 40px;
+    border-radius: 35px; 
+    cursor: pointer;
+    filter: drop-shadow(17px 19px 24px rgba(0, 0, 0, 0.13));
+    height: 100%;
+}
+
+.dish-card:hover {
+    border: 2px solid tomato; 
+}
+
+.dish-card:hover button {
+    background: tomato; 
+}
+
+.dish-card img {
+    width: 100%;
+    height: 270px;
+    object-fit: cover;
+    border-radius: 35px;
+    margin-bottom: 15px;
+}
+
+.dish-card .price {
+    font-size: 21px;
+    font-weight: 500;
+    margin: 5px 0;
+}
+
+.dish-card h3 {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 5px 0;
+}
+
+.dish-card .weight {
+    color: #666;
+    margin: 15px 0 0 0;
+}
+
+.dish-card button {
+    background-color: #f1eee9;
+    color: black;
+    padding: 10px 30px;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-top: 15px;
+    font-weight: 500;
+    border: none;
+}
+
+.nav-menu a.active {
+    color: tomato;
+}
+
+@media (max-width: 800px) {
+    .dishes-container {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .nav-menu {
+        justify-content: space-between; 
+    }
+}
+
+@media (max-width: 600px) {
+    h1 {
+        text-align: center;
+    }
+    
+    .nav-menu {
+        flex-direction: column; 
+        align-items: center; 
+        gap: 20px; 
+    }
+    
+    .nav-menu a {
+        font-size: 20px; 
+    }
+    
+    .dishes-section h2 {
+        text-align: center;
+    }
+    
+    .dishes-container {
+        grid-template-columns: 1fr;
+    }
+}
+
+.order-section {
+    padding: 30px 15px;
+    margin-top: 40px;
+}
+
+.order-section h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 28px;
+}
+
+.order-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.form-section h3 {
+    color: #333;
+    margin-bottom: 20px;
+    font-size: 20px;
+    border-bottom: 2px solid tomato;
+    padding-bottom: 10px;
+}
+
+.form-section {
+    margin-bottom: 0;
+}
+
+.form-columns {
+    display: flex;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+.form-column {
+    flex: 1;
+}
+
+@media (max-width: 900px) {
+    .form-columns {
+        flex-direction: column;
+        gap: 20px;
+    }
+}
+
+.form-buttons {
+    display: flex;
+    gap: 15px;
+    justify-content: left;
+    margin-top: 30px;
+}
+
+.form-buttons .reset-btn {
+    background-color: #6c757d;
+    width: auto;
+    padding: 12px 30px;
+}
+
+.form-buttons .reset-btn:hover {
+    background-color: #545b62;
+}
+
+.form-buttons .submit-btn {
+    width: auto;
+    padding: 12px 30px;
+}
+
+@media (max-width: 600px) {
+    .order-container {
+        padding: 20px;
+        margin: 0 10px;
+    }
+    
+    .form-buttons {
+        flex-direction: column;
+    }
+    
+    .form-buttons button {
+        width: 100%;
+    }
+    
+    .form-columns {
+        gap: 15px;
+    }
+}
