@@ -327,7 +327,7 @@ button:hover {
     flex: 1;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 800px) {
     .form-columns {
         flex-direction: column;
         gap: 20px;
@@ -373,4 +373,5 @@ button:hover {
     .form-columns {
         gap: 15px;
     }
+
 }
