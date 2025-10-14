@@ -534,7 +534,7 @@ button:hover {
     text-align: center;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 800px) {
     .combos-container {
         grid-template-columns: repeat(2, 1fr);
         gap: 20px;
@@ -553,6 +553,7 @@ button:hover {
     .combo-dish span {
         font-size: 14px;
     }
+    
     .combo-dish small {
         font-size: 13px;
     }
@@ -581,25 +582,6 @@ button:hover {
     
     .combo-dish small {
         font-size: 12px;
-    }
-}
-
-@media (max-width: 400px) {
-    .combo-card {
-        padding: 20px 15px;
-        gap: 12px;
-    }
-    
-    .combo-dish img {
-        width: 75px;
-        height: 55px;
-    }
-    
-    .combo-dish span {
-        font-size: 13px;
-    }
-    .combo-dish small {
-        font-size: 11px;
     }
 }
 .order-notification {
@@ -665,3 +647,4 @@ button:hover {
         font-size: 15px;
     }
 }
+
