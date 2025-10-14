@@ -553,7 +553,6 @@ button:hover {
     .combo-dish span {
         font-size: 14px;
     }
-    
     .combo-dish small {
         font-size: 13px;
     }
@@ -584,6 +583,7 @@ button:hover {
         font-size: 12px;
     }
 }
+
 .order-notification {
     position: fixed;
     top: 0;
@@ -647,4 +647,3 @@ button:hover {
         font-size: 15px;
     }
 }
-
