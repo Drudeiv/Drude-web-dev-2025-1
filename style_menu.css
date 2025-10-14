@@ -559,47 +559,68 @@ button:hover {
 }
 
 @media (max-width: 600px) {
+    .lunch-combos-section {
+        padding: 15px 5px;
+    }
+    
+    .lunch-combos-section h2 {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+    
     .combos-container {
         grid-template-columns: 1fr;
-        gap: 20px;
-        padding: 0 10px;
+        gap: 12px;
+        padding: 0 5px;
     }
     
     .combo-card {
-        padding: 25px 20px;
+        padding: 15px 10px;
         gap: 15px;
+        justify-content: space-around;
+        min-height: 100px;
+    }
+    
+    .combo-dish {
+        min-width: 50px;
     }
     
     .combo-dish img {
-        width: 85px;
-        height: 65px;
+        width: 45px;
+        height: 35px;
     }
     
     .combo-dish span {
-        font-size: 14px;
+        font-size: 11px;
     }
     
     .combo-dish small {
-        font-size: 12px;
+        font-size: 9px;
     }
 }
 
 @media (max-width: 400px) {
     .combo-card {
-        padding: 20px 15px;
+        padding: 12px 8px;
         gap: 12px;
+        min-height: 90px;
+    }
+    
+    .combo-dish {
+        min-width: 45px;
     }
     
     .combo-dish img {
-        width: 75px;
-        height: 55px;
+        width: 40px;
+        height: 30px;
     }
     
     .combo-dish span {
-        font-size: 13px;
+        font-size: 10px;
     }
+    
     .combo-dish small {
-        font-size: 11px;
+        font-size: 8px;
     }
 }
 
@@ -665,4 +686,5 @@ button:hover {
         padding: 10px 25px;
         font-size: 15px;
     }
+
 }
