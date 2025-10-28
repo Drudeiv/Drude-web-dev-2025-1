@@ -104,8 +104,7 @@ function filter_dishes(category, kind) {
     });
 }
 
-
-function display_dishes() {
+function display_dishes(dishesData) {
     const categories = {
         'soup': document.getElementById('soup'),
         'main_dishes': document.getElementById('main_dishes'), 
@@ -113,6 +112,7 @@ function display_dishes() {
         'desserts': document.getElementById('desserts'),
         'drinks': document.getElementById('drinks')
     };
+    
     Object.values(categories).forEach(section => {
         if (section) {
             const container = section.querySelector('.dishes-container');
@@ -122,15 +122,13 @@ function display_dishes() {
         }
     });
 
-    const sorted_dishes = dishes.sort((a, b) => {
+    const sorted_dishes = dishesData.sort((a, b) => {
         const nameA = a.name.toLowerCase();
         const nameB = b.name.toLowerCase();
         if (nameA < nameB) return -1;
         if (nameA > nameB) return 1;
         return 0;
     });
-    
-    // Добавляем блюда в соответствующие секции
     sorted_dishes.forEach(dish => {
         const section = categories[dish.category];
         if (section) {
@@ -145,6 +143,10 @@ function display_dishes() {
     Object.keys(categories).forEach(category => {
         const section = categories[category];
         if (section) {
+            const oldFilters = section.querySelector('.filters-container');
+            if (oldFilters) {
+                oldFilters.remove();
+            }
             const filters = create_filters(category);
             const container = section.querySelector('.dishes-container');
             section.insertBefore(filters, container);
@@ -152,6 +154,47 @@ function display_dishes() {
     });
 }
 
+function showLoadingIndicator() {
+    const categories = ['soup', 'main_dishes', 'salads', 'desserts', 'drinks'];
+    categories.forEach(category => {
+        const section = document.getElementById(category);
+        if (section) {
+            const container = section.querySelector('.dishes-container');
+            if (container) {
+                container.innerHTML = '<div class="loading">Загрузка блюд...</div>';
+            }
+        }
+    });
+}
+
+async function initializeMenu() {
+    showLoadingIndicator();
+    try {
+        await loadDishes();
+        if (dishes.length === 0) {
+            throw new Error('Не удалось загрузить блюда');
+        }
+        display_dishes(dishes);
+        setTimeout(() => {
+            if (typeof initializeOrderSystem === 'function') {
+                initializeOrderSystem();
+            }
+        }, 100);
+    } catch (error) {
+        console.error('Ошибка инициализации меню:', error);
+        const categories = ['soup', 'main_dishes', 'salads', 'desserts', 'drinks'];
+        categories.forEach(category => {
+            const section = document.getElementById(category);
+            if (section) {
+                const container = section.querySelector('.dishes-container');
+                if (container) {
+                    container.innerHTML = '<div class="error">Ошибка загрузки меню. Пожалуйста, обновите страницу.</div>';
+                }
+            }
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    display_dishes();
+    initializeMenu();
 });
