@@ -647,3 +647,15 @@ button:hover {
         font-size: 15px;
     }
 }
+.loading, .error {
+    text-align: center;
+    padding: 40px;
+    font-size: 18px;
+    color: black;
+    grid-column: 1 / -1;
+}
+
+.error {
+    color: tomato;
+}
+
