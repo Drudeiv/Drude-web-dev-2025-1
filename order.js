@@ -33,9 +33,13 @@ function update_order() {
         textDisplay.id = 'text-order-display';
         textDisplay.className = 'text-order-display';
         
-        const formSection = document.querySelector('.form-section h3').parentElement;
-        const commentsGroup = document.querySelector('#comments').closest('.form-group');
-        formSection.insertBefore(textDisplay, commentsGroup);
+        const formSection = document.querySelector('.form-section h3')?.parentElement;
+        if (formSection) {
+            const commentsGroup = document.querySelector('#comments')?.closest('.form-group');
+            if (commentsGroup) {
+                formSection.insertBefore(textDisplay, commentsGroup);
+            }
+        }
     }
     
     const has_selected_dishes = Object.values(selected_dishes).some(dish => dish !== null);
@@ -43,6 +47,7 @@ function update_order() {
 
     if (!has_selected_dishes) {
         textDisplay.innerHTML = '<p class="no-selection">Ничего не выбрано</p>';
+        updateOrderPanel();
         return;
     }
     
@@ -72,9 +77,8 @@ function update_order() {
         <div class="cost-value">${price + '\u20BD'}</div>
     </div>
     `;
-    updateFormSelects();
+    updateOrderPanel();
 }
-
 
 function backlight(category, dish_keyword) {
     const allDishCards = document.querySelectorAll('.dish-card');
@@ -89,24 +93,42 @@ function backlight(category, dish_keyword) {
 
 function add_button() {
     const addButtons = document.querySelectorAll('.dish-card button');
-     addButtons.forEach(button => {
+    console.log('Найдено кнопок:', addButtons.length);
+    
+    addButtons.forEach(button => {
         button.addEventListener('click', function() {
+            console.log('Кнопка "Добавить" нажата');
             const dish_card = this.closest('.dish-card');
             const dish_keyword = dish_card.getAttribute('data-dish');
             const dish = dishes.find(d => d.keyword === dish_keyword);
 
             if (dish) {
-               selected_dishes[dish.category] = dish;
+                console.log('Добавляем блюдо:', dish.name);
+                selected_dishes[dish.category] = dish;
                 backlight(dish.category, dish_keyword);
                 update_order();
                 updateHiddenFields();
+                saveOrderLocalStorage();
             }
         });
-     });
+    });
+}
+
+function saveOrderLocalStorage() {
+    const order_data = {};
+    Object.entries(selected_dishes).forEach(([category, dish]) => {
+        order_data[category] = dish ? dish.keyword : null;
+    });
+    localStorage.setItem('currentOrder', JSON.stringify(order_data));
+    console.log('Сохранено в localStorage:', order_data);
 }
 
 function updateHiddenFields() {
     const form = document.getElementById('order');
+    if (!form) {
+        return;
+    }
+    
     clearHiddenFields();
     Object.entries(selected_dishes).forEach(([category, dish]) => {
         if (dish) {
@@ -123,10 +145,32 @@ function updateHiddenFields() {
             form.appendChild(hiddenInput);
         }
     });
+    saveOrderLocalStorage();
+}
+
+function loadOrderFromLocalStorage() {
+    const savedOrder = localStorage.getItem('currentOrder');
+    if (savedOrder) {
+        const orderData = JSON.parse(savedOrder);
+        Object.entries(orderData).forEach(([category, dishKeyword]) => {
+            if (dishKeyword) {
+                const dish = dishes.find(d => d.keyword === dishKeyword);
+                if (dish) {
+                    selected_dishes[category] = dish;
+                    backlight(category, dishKeyword);
+                }
+            }
+        });
+    }
 }
 
 function clearHiddenFields() {
     const form = document.getElementById('order');
+    if (!form) {
+        console.log('Форма не найдена, пропускаем clearHiddenFields');
+        return;
+    }
+    
     const hiddenFields = form.querySelectorAll('input[type="hidden"]');
     hiddenFields.forEach(field => {
         if (field.name === 'soup' || field.name === 'main_dishes' || field.name === 'salads' || 
@@ -137,14 +181,18 @@ function clearHiddenFields() {
 }
 
 function initializeOrderSystem() {
+    
     if (document.querySelectorAll('.dish-card').length === 0) {
         setTimeout(initializeOrderSystem, 100);
         return;
     }
     
+    loadOrderFromLocalStorage();
     add_button();
     update_order();
     updateHiddenFields();
+    setupCheckoutLink();
+    
     const resetButton = document.querySelector('.reset-btn');
     if (resetButton) {
         resetButton.addEventListener('click', function() {
@@ -165,6 +213,66 @@ function initializeOrderSystem() {
     }
 }
 
+function updateOrderPanel() {
+    const orderPanel = document.getElementById('order-panel');
+    const currentTotal = document.getElementById('current-total');
+    const checkoutLink = document.getElementById('checkout-link');
+    
+    if (!orderPanel || !currentTotal || !checkoutLink) return;
+    
+    const price = calculate();
+    const isValidCombo = validate_order_silent();
+    
+    currentTotal.textContent = price + '\u20BD';
+    
+    if (price > 0) {
+        orderPanel.style.display = 'block';
+        
+        if (isValidCombo) {
+            checkoutLink.classList.remove('disabled');
+            checkoutLink.onclick = null;
+        } else {
+            checkoutLink.classList.add('disabled');
+            checkoutLink.onclick = function(e) {
+                e.preventDefault();
+                DisplayNotification(selected_dishes);
+            };
+        }
+    } else {
+        orderPanel.style.display = 'none';
+    }
+}
+
+function validate_order_silent() {
+    const selected = selected_dishes;
+    const true_combo = [
+        {soup: true, main_dishes: true, salads: true, drinks: true},
+        {soup: true, main_dishes: true, drinks: true},
+        {soup: true, salads: true, drinks: true},
+        {main_dishes: true, salads: true, drinks: true},
+        {main_dishes: true, drinks: true}
+    ];
+    
+    return true_combo.some(combo => {
+        return Object.keys(combo).every(key => {
+            if (combo[key]) {
+                return selected[key] !== null;
+            }
+            return true;
+        });
+    });
+}
+
+function setupCheckoutLink() {
+    const checkoutLink = document.getElementById('checkout-link');
+    if (checkoutLink) {
+        checkoutLink.addEventListener('click', function(e) {
+            saveOrderLocalStorage();
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    console.log('DOM загружен, запускаем order.js');
     initializeOrderSystem();
 });
