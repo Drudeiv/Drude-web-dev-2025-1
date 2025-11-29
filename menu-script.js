@@ -6,8 +6,8 @@ function create_dish_card(dish) {
     
     dishCard.innerHTML = `
         <img src="${dish.image}" alt="${dish.name}">
-        <h3>${dish.name}</h3>
         <p class="price">${dish.price}&#8381;</p>
+        <h3>${dish.name}</h3>
         <p class="weight">${dish.count}</p>
         <button>Добавить</button>
     `;
