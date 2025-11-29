@@ -21,7 +21,7 @@
                 <li><a href="#desserts">Десерты</a></li>
                 <li><a href="#drinks">Напитки</a></li>
                 <li><a href="#footer-contacts">Контакты</a></li>
-                <li><a href="#order-form">Сделать заказ</a></li>
+                <li><a href="check.html">Оформить заказ</a></li>
             </ul>
         </nav>
     </header>
@@ -133,6 +133,7 @@
             <div class="dishes-container">
             </div>
         </section>
+        <!--
         <section id="order-form" class="order-section">
         <h2>Сделать заказ</h2>
         <div class="order-container">
@@ -143,7 +144,7 @@
                             <h3>Ваш заказ</h3>
                             <div id="text-order-display" class="text-order-display">
                                 <p class="no-selection">Ничего не выбрано</p>
-                            </div>
+                            </div>-->
                             <!--<div class="form-group">
                                 <label for="soup-select">Суп</label>
                                 <select id="soup-select" name="soup">
@@ -205,7 +206,7 @@
                                     <option value="black-tea">Чёрный чай</option>
                                 </select>
                             </div>-->
-                            <div class="form-group">
+                            <!--<div class="form-group">
                                 <label for="comments">Комментарии к заказу</label>
                                 <textarea id="comments" name="comments"></textarea>
                             </div>
@@ -268,6 +269,17 @@
                 </div>
             </form>
         </div>
+    </section>-->
+    <section id="order-panel" class="order-panel-section" style="display: none;">
+        <div class="order-panel">
+            <div class="order-panel-content">
+                <div class="order-total">
+                    <span class="total-label">Сумма заказа:</span>
+                    <span class="total-value" id="current-total">0&#8381;</span>
+                </div>
+                <a href="check.html" class="checkout-link" id="checkout-link">Перейти к оформлению</a>
+            </div>
+        </div>
     </section>
     </main>
     <footer id="footer-contacts">
@@ -281,6 +293,3 @@
     <script src="notification.js"></script>
 </body>
 </html>
-
-
-
